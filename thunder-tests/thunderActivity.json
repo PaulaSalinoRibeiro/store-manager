@@ -4,11 +4,11 @@
     "colId": "history",
     "containerId": "",
     "name": "listAllProducts",
-    "url": "localhost:3000/products/1",
+    "url": "localhost:3000/products",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-06-29T17:32:07.028Z",
-    "modified": "2022-06-29T20:56:47.786Z",
+    "modified": "2022-06-29T22:27:36.118Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -18,13 +18,32 @@
     "colId": "history",
     "containerId": "",
     "name": "getProductById",
-    "url": "localhost:3000/products",
+    "url": "localhost:3000/products/4",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-06-29T17:32:07.028Z",
-    "modified": "2022-06-29T20:56:51.320Z",
+    "modified": "2022-06-29T22:05:39.701Z",
     "headers": [],
     "params": [],
+    "tests": []
+  },
+  {
+    "_id": "82392570-3805-4e4e-a849-06c1d796ac4a",
+    "colId": "history",
+    "containerId": "",
+    "name": "createNewProduct",
+    "url": "localhost:3000/products/",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-06-29T17:32:07.028Z",
+    "modified": "2022-06-29T22:27:08.729Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "  {\n    \"name\": \"ProdutoY\"\n  }",
+      "form": []
+    },
     "tests": []
   }
 ]

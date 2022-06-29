@@ -15,7 +15,6 @@ const getById = async (id) => {
 };
 
 const add = async (name) => {
-  if (!name) throw new Error({ code: 404, message: 'name is required' });
   const result = await ProductsModel.add(name);
   return result;
 };

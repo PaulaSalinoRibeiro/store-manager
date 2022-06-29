@@ -15,16 +15,15 @@ const getById = async (id) => {
 };
 
 const add = async (name) => {
-  const [data] = connection
+  const [row] = await connection
     .execute(
       'INSERT INTO products (name) VALUES (?)',
       [name],
   );
   const result = {
-    id: data.insertId,
+    id: row.insertId,
     name,
   };
-
   return result;
 };
 

@@ -14,7 +14,14 @@ const getById = async (id) => {
   return data;
 };
 
+const add = async (name) => {
+  if (!name) throw new Error({ code: 404, message: 'name is required' });
+  const result = await ProductsModel.add(name);
+  return result;
+};
+
 module.exports = {
   getAll,
   getById,
+  add,
 };

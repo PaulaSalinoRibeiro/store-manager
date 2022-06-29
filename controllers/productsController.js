@@ -22,7 +22,18 @@ const getById = async (req, res, next) => {
   }
 };
 
+const add = async (req, res, next) => {
+  const { name } = req.body;
+  try {
+    const data = await ProductsService.add(name);
+    res.status(201).json(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAll,
   getById,
+  add,
 };

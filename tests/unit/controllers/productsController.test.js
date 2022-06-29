@@ -77,7 +77,7 @@ describe('Test layer controller ', () => {
 
     it('should have return a json', async () => {
       await ProductsController.getById(req, res, next);
-      expect(res.json.calledWith(sinon.match.array)).to.be.equal(true);
+      expect(res.json.calledWith(sinon.match.object)).to.be.equal(true);
     });
   });
 });

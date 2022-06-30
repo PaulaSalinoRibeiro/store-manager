@@ -28,7 +28,7 @@ const add = async (req, res, next) => {
   try {
     const data = await ProductsService.add(name);
     if (data.error) {
-      return res.status(httpStatusCode[data.error.code]).json(data.error.message);
+      return res.status(httpStatusCode[data.error.code]).json({ message: data.error.message });
     }
     res.status(201).json(data);
   } catch (err) {

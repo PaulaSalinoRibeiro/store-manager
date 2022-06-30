@@ -25,6 +25,7 @@ const add = async (name) => {
       },
     };
   }
+
   const result = await ProductsModel.add(name);
   return result;
 };

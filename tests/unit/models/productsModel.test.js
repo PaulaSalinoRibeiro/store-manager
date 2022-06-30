@@ -7,7 +7,6 @@ const ProductsModel = require('../../../models/productsModel');
 describe('Test productsModel', () => {
 
   describe('check if find all products', () => {
-
     const produtcs = [
       {
         "id": 1,
@@ -31,8 +30,7 @@ describe('Test productsModel', () => {
     });
   })
 
-  describe('check if find product by id', () => {
-    
+  describe('check if find product by id', () => {  
     describe('where find product', () => {
 
       const product = [{}];
@@ -75,5 +73,27 @@ describe('Test productsModel', () => {
         })
       });
     });
+  });
+
+  describe('its possible add a new product', () => {
+    const newProduct = [{ insertId: 1 }];
+
+    beforeEach(async () => {
+      await sinon.stub(connection, 'execute').resolves(newProduct)
+    });
+
+    afterEach(async () => {
+      await connection.execute.restore();
+    });
+
+    it('should return a object', async () => {
+      const result = await ProductsModel.add('test');
+      expect(result).to.be.a('object');
+    });
+
+    it('should have id and name', async () => {
+      const result = await ProductsModel.add('test');
+      expect(result).to.deep.equal({ id: 1, name: 'test' });
+    })
   });
 });

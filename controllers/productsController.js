@@ -1,4 +1,5 @@
 const ProductsService = require('../services/productsService');
+const httpStatusCode = require('../helpers/httpStatusCode');
 
 const getAll = async (_req, res, next) => {
   try {
@@ -26,6 +27,9 @@ const add = async (req, res, next) => {
   const { name } = req.body;
   try {
     const data = await ProductsService.add(name);
+    if (data.error) {
+      return res.status(httpStatusCode[data.error.code]).json(data.error.message);
+    }
     res.status(201).json(data);
   } catch (err) {
     next(err);

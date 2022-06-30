@@ -80,4 +80,32 @@ describe('Test layer controller ', () => {
       expect(res.json.calledWith(sinon.match.object)).to.be.equal(true);
     });
   });
+
+  describe('Test function add when name is valid', () => {
+    const newProduct = {
+      "id": 4,
+      "name": "ProdutoX"
+    };
+
+    const res = {};
+    const req = {};
+    const next = () => { };
+
+    beforeEach(async () => {
+      req.body = { "name": "ProdutoX" };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      await sinon.stub(ProductsService, 'add').resolves(newProduct);
+    });
+
+    afterEach(async () => {
+      await ProductsService.add.restore();
+    })
+
+    it('should have a status 201', async () => {
+      const result = await ProductsController.add(req, res, next);
+      expect(res.status.calledWith(201)).to.be.equal(true);
+    });
+  });
+
 });

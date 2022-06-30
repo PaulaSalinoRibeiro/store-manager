@@ -80,7 +80,7 @@ describe('Test layer services', () => {
     });
   });
 
-  describe('test functioon that create a new product', () => {
+  describe('test function that create a new product', () => {
     const newProduct = {
       id: 1,
       name: 'ProductA'

@@ -79,4 +79,44 @@ describe('Test layer services', () => {
       });
     });
   });
+
+  describe('test functioon that create a new product', () => {
+    const newProduct = {
+      id: 1,
+      name: 'ProductA'
+    };
+
+    beforeEach(async () => {
+      await sinon.stub(ProductsModel, 'add').resolves(newProduct);
+    });
+
+    afterEach(async () => {
+      await ProductsModel.add.restore()
+    });
+
+    it('should be return a object', async () => {
+      const result = await ProductsService.add('ProductA');
+      expect(result).to.be.a('object');
+    });
+
+    it('should have a id and name', async () => {
+      const result = await ProductsService.add('ProductA');
+      expect(result).to.deep.equal({
+        id: 1,
+        name: 'ProductA'
+      });
+    });
+  });
+
+  describe('test if name is validate', () => {
+    const messageError = { error: { code: 'badRequest', message: '"name" is required' } }
+    it('shoulde have return an objet', async () => {
+      const result = await ProductsService.add('');
+      expect(result).to.be.a('object')
+    });
+    it('shoulde have return an objet with erro key', async () => {
+      const result = await ProductsService.add('');
+      expect(result).to.deep.equal(messageError);
+    });
+  });
 });

@@ -104,8 +104,6 @@ describe('Test salesModel', () => {
     it('should be return just a object', async () => {
       const result = await SalesModel.getSalesById(1)
       expect(result).to.be.a('object')
-    });
-    
+    });   
   });
-
 });

@@ -1,8 +1,9 @@
 const { expect } = require('chai');
-// const sinon = require('sinon');
+const sinon = require('sinon');
+const { getSalesById } = require('../../../models/salesModel');
 
 const SalesService = require('../../../services/salesServices');
-// const SalesModel = require('../../../services/salesServices');
+const SalesModel = require('../../../services/salesServices');
 // const ProductsModel = require('../../../models/productsModel');
 
 describe('Test createSales function in Service', () => {
@@ -72,4 +73,100 @@ describe('Test createSales function in Service', () => {
     });
   });
 
+});
+
+describe('Test getAllSales function', () => {
+  const payload = [
+    {
+      "saleId": 1,
+      "date": "2021-09-09T04:54:29.000Z",
+      "productId": 1,
+      "quantity": 2
+    },
+    {
+      "saleId": 1,
+      "date": "2021-09-09T04:54:54.000Z",
+      "productId": 2,
+      "quantity": 2
+    }
+  ]
+
+  beforeEach(async () => {
+    await sinon.stub(SalesModel, 'getAllSales').resolves(payload)
+  });
+
+  afterEach(async () => {
+    await SalesModel.getAllSales.restore()
+  });
+
+  it('should be return a array', async () => {
+    const result = await SalesService.getAllSales()
+    expect(result).to.be.an('array')
+  });
+
+  it('should be return a array with length 2', async () => {
+    const result = await SalesService.getAllSales()
+    expect(result).to.deep.equal([
+      {
+        "saleId": 1,
+        "date": "2021-09-09T04:54:29.000Z",
+        "productId": 1,
+        "quantity": 2
+      },
+      {
+        "saleId": 1,
+        "date": "2021-09-09T04:54:54.000Z",
+        "productId": 2,
+        "quantity": 2
+      }
+    ])
+  });
+});
+
+describe('Test getSalesById function', () => {
+  const payload = [
+    {
+      "SaleId": 1,
+      "date": "2021-09-09T04:54:29.000Z",
+      "productId": 1,
+      "quantity": 2
+    },
+    {
+      "SaleId": 1,
+      "date": "2021-09-09T04:54:54.000Z",
+      "productId": 2,
+      "quantity": 2
+    }
+  ]
+
+  beforeEach(async () => {
+    await sinon.stub(SalesModel, 'getSalesById').resolves(payload)
+  });
+
+  afterEach(async () => {
+    await SalesModel.getSalesById.restore()
+  });
+
+  it('should be return a array', async () => {
+    const result = await SalesService.getSalesById(1)
+    expect(result).to.be.an('array')
+  });
+
+  it('should be a array lenght without SalesId', async () => {
+    const result = await SalesService.getSalesById(1)
+    expect(result).to.deep.equal([
+      {
+        "SaleId": 1,
+        "date": "2021-09-09T04:54:29.000Z",
+        "productId": 1,
+        "quantity": 2
+      },
+      {
+        "SaleId": 1,
+        "date": "2021-09-09T04:54:54.000Z",
+        "productId": 2,
+        "quantity": 2
+      }
+    ])
+  });
 });

@@ -64,10 +64,20 @@ const remove = async (id) => {
   return row;
 };
 
+const filterByName = async (q) => {
+  if (!q) {
+    const data = await ProductsModel.getAll();
+    return data;
+  }
+  const search = await ProductsModel.filterByName(q);
+  return search;
+};
+
 module.exports = {
   getAll,
   getById,
   add,
   update,
   remove,
+  filterByName,
 };

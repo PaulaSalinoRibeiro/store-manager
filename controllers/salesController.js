@@ -63,7 +63,7 @@ const update = async (req, res, next) => {
   const { data } = req.body;
   try {
     const result = await SalesService.update(id, data);
-    if (result.erro) {
+    if (result.error) {
       return res.status(httpStatusCode[result.error.code]).json({ message: result.error.message });
     }
     res.status(200).json(result);

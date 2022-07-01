@@ -45,6 +45,30 @@ const createSales = async (sales) => {
   };
 };
 
+const getAllSales = async () => {
+  const data = await SalesModel.getAllSales();
+
+  if (data.length === 0) return { error: { code: 'notFound', message: 'Sale not found' } };
+
+  return data;
+};
+
+const serialize = (data) => ({
+    date: data.date,
+    productId: data.productId,
+    quantity: data.quantity,
+  });
+
+const getSalesById = async (id) => {
+  const data = await SalesModel.getSalesById(id);
+
+  if (data.length === 0) return { error: { code: 'notFound', message: 'Sale not found' } };
+
+  return data.map((sale) => serialize(sale));
+};
+
 module.exports = {
   createSales,
+  getAllSales,
+  getSalesById,
 };

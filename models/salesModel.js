@@ -61,10 +61,23 @@ const remove = async (id) => {
   return row;
 };
 
+const update = async (salesId, productId, quantity) => {
+  const [rows] = await connection
+    .execute(
+      `
+        UPDATE sales_products SET product_id = ?, quantity = ?
+        WHERE sale_id = ?
+      `,
+      [salesId, productId, quantity],
+  );
+  return rows;
+}; 
+
 module.exports = {
   createSales,
   addSalesProducts,
   getAllSales,
   getSalesById,
   remove,
+  update,
 };

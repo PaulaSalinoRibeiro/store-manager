@@ -52,4 +52,60 @@ describe('Test salesModel', () => {
 
   });
 
+  describe('test getAllSales', () => {
+
+    const payload = [
+      {
+        "saleId": 1,
+        "date": "2021-09-09T04:54:29.000Z",
+        "productId": 1,
+        "quantity": 2
+      },
+      {
+        "saleId": 1,
+        "date": "2021-09-09T04:54:54.000Z",
+        "productId": 2,
+        "quantity": 2
+      }
+    ]
+
+    beforeEach(async () => {
+      await sinon.stub(connection, 'execute').resolves(payload)
+    });
+
+    afterEach(async () => {
+      await connection.execute.restore()
+    });
+
+    it('should be return a object', async () => {
+      const result = await SalesModel.getAllSales();
+      expect(result).to.be.a('object')
+    });
+  });
+
+  describe('test getBy', () => {
+    const payload = [
+      {
+        "saleId": 1,
+        "date": "2021-09-09T04:54:29.000Z",
+        "productId": 1,
+        "quantity": 2
+      }
+    ]
+
+    beforeEach(async () => {
+      await sinon.stub(connection, 'execute').resolves(payload)
+    });
+
+    afterEach(async () => {
+      await connection.execute.restore()
+    });
+
+    it('should be return just a object', async () => {
+      const result = await SalesModel.getSalesById(1)
+      expect(result).to.be.a('object')
+    });
+    
+  });
+
 });

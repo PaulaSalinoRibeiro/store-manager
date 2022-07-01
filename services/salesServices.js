@@ -67,8 +67,17 @@ const getSalesById = async (id) => {
   return data.map((sale) => serialize(sale));
 };
 
+const remove = async (id) => {
+  const data = await SalesModel.getSalesById(id);
+  if (data.length === 0) return { error: { code: 'notFound', message: 'Sale not found' } };
+
+  const row = await SalesModel.remove(id);
+  return row;
+};
+
 module.exports = {
   createSales,
   getAllSales,
   getSalesById,
+  remove,
 };

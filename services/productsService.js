@@ -54,9 +54,20 @@ const update = async (name, id) => {
   };
 };
 
+const remove = async (id) => {
+  const result = await ProductsModel.getById(id);
+
+  if (result.length === 0) return { error: { code: 'notFound', message: 'Product not found' } };
+
+  const row = await ProductsModel.remove(id);
+
+  return row;
+};
+
 module.exports = {
   getAll,
   getById,
   add,
   update,
+  remove,
 };

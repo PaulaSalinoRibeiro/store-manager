@@ -75,9 +75,23 @@ const remove = async (id) => {
   return row;
 };
 
+const update = async (id, data) => {
+  const saleId = await SalesModel.getSalesById(id);
+
+  if (saleId.length === 0) return { error: { code: 'notFound', message: 'Product not found' } };
+
+  await Promise.all(data
+    .map((sale) => SalesModel.addSalesProducts(id, sale.productId, sale.quantity)));
+  return {
+    saleId: id,
+    itemsUpdated: data,
+  };
+};
+
 module.exports = {
   createSales,
   getAllSales,
   getSalesById,
   remove,
+  update,
 };

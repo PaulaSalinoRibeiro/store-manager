@@ -63,10 +63,21 @@ const remove = async (req, res, next) => {
   }
 };
 
+const filterByName = async (req, res, next) => {
+  const { q } = req.query;
+  try {
+    const result = await ProductsService.filterByName(q);
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   add,
   update,
   remove,
+  filterByName,
 };

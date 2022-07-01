@@ -45,8 +45,22 @@ const getSalesById = async (req, res, next) => {
   }
 };
 
+const remove = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const result = await SalesService.remove(id);
+    if (result.error) {
+      return res.status(httpStatusCode[result.error.code]).json({ message: result.error.message });
+    }
+    res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createSales,
   getAllSales,
   getSalesById,
+  remove,
 };

@@ -16,6 +16,37 @@ const createSales = async (req, res, next) => {
   }
 };
 
+const getAllSales = async (_req, res, next) => {
+  try {
+    const data = await SalesService.getAllSales();
+
+    if (data.error) {
+      return res.status(httpStatusCode[data.error.code]).json({ message: data.error.message });
+    }
+
+    return res.status(200).json(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getSalesById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const data = await SalesService.getSalesById(id);
+
+    if (data.error) {
+      return res.status(httpStatusCode[data.error.code]).json({ message: data.error.message });
+    }
+
+    return res.status(200).json(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createSales,
+  getAllSales,
+  getSalesById,
 };

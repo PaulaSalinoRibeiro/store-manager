@@ -27,8 +27,21 @@ const add = async (name) => {
   return result;
 };
 
+const update = async (id, name) => {
+  const [rows] = await connection
+    .execute(
+      `UPDATE products
+      SET name = ?
+      WHERE id=?`,
+      [name, id],
+  );
+  
+  return rows;
+};
+
 module.exports = {
   getAll,
   getById,
   add,
+  update,
 };

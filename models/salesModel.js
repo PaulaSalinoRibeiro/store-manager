@@ -68,7 +68,7 @@ const update = async (salesId, productId, quantity) => {
         UPDATE sales_products SET product_id = ?, quantity = ?
         WHERE sale_id = ?
       `,
-      [salesId, productId, quantity],
+      [productId, quantity, salesId],
   );
   return rows;
 }; 

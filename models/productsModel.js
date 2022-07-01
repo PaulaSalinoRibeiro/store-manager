@@ -48,10 +48,21 @@ const remove = async (id) => {
   return row;
 };
 
+const filterByName = async (name) => {
+  const [row] = await connection
+    .execute(
+      `SELECT * FROM products
+      WHERE name LIKE CONCAT ('%', ?, '%')`,
+      [name],
+  );
+  return row;
+};
+
 module.exports = {
   getAll,
   getById,
   add,
   update,
   remove,
+  filterByName,
 };

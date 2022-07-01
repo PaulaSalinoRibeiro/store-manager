@@ -52,9 +52,19 @@ const getSalesById = async (id) => {
   return data;
 };
 
+const remove = async (id) => {
+  const [row] = await connection
+    .execute(
+      'DELETE FROM sales WHERE id = ?',
+      [id],
+  );
+  return row;
+};
+
 module.exports = {
   createSales,
   addSalesProducts,
   getAllSales,
   getSalesById,
+  remove,
 };

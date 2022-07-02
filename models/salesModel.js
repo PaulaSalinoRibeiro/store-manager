@@ -64,10 +64,9 @@ const remove = async (id) => {
 const update = async (salesId, productId, quantity) => {
   const [rows] = await connection
     .execute(
-      `
-        UPDATE sales_products SET product_id = ?, quantity = ?
-        WHERE sale_id = ?
-      `,
+      `UPDATE sales_products 
+        SET product_id = ?, quantity = ?
+        WHERE sale_id = ?`,
       [productId, quantity, salesId],
   );
   return rows;

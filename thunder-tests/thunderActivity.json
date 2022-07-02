@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-06-29T17:32:07.028Z",
-    "modified": "2022-07-01T15:47:47.770Z",
+    "modified": "2022-07-01T21:20:40.283Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -61,6 +61,26 @@
     "tests": []
   },
   {
+    "_id": "1fe6694b-11a1-496b-ae88-6e77ee448817",
+    "colId": "history",
+    "containerId": "",
+    "name": "filterByName",
+    "url": "localhost:3000/products/search?q=Martelo",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-06-29T17:32:07.028Z",
+    "modified": "2022-07-01T21:29:48.856Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "q",
+        "value": "Martelo",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  },
+  {
     "_id": "c5c13ce1-4f0a-428b-87aa-5f288f94a132",
     "colId": "history",
     "containerId": "",
@@ -69,7 +89,7 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-07-01T10:35:45.920Z",
-    "modified": "2022-07-01T19:14:35.681Z",
+    "modified": "2022-07-02T00:54:55.389Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -79,11 +99,11 @@
     "colId": "history",
     "containerId": "",
     "name": "getSalesById",
-    "url": "localhost:3000/sales/1",
+    "url": "localhost:3000/sales/2",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-07-01T10:35:45.920Z",
-    "modified": "2022-07-01T10:45:22.346Z",
+    "modified": "2022-07-02T00:54:22.915Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -117,6 +137,25 @@
     "body": {
       "type": "json",
       "raw": "  {\n    \"name\": \"\"\n  }",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "61a8897e-37f2-4668-a090-9276818cde60",
+    "colId": "history",
+    "containerId": "",
+    "name": "updateSales",
+    "url": "localhost:3000/sales/2",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2022-07-01T22:17:15.050Z",
+    "modified": "2022-07-02T00:54:41.952Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "  [\n    {\n      \"productId\": 1,\n      \"quantity\":200\n    }\n  ]",
       "form": []
     },
     "tests": []

@@ -60,14 +60,17 @@ const remove = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   const { id } = req.params;
-  const { data } = req.body;
+  const sales = req.body;
+  console.log(id, sales);
   try {
-    const result = await SalesService.update(id, data);
+    const result = await SalesService.update(id, sales);
+    console.log('controller result', result);
     if (result.error) {
       return res.status(httpStatusCode[result.error.code]).json({ message: result.error.message });
     }
     res.status(200).json(result);
   } catch (err) {
+    console.log('err', err);
     next(err);
   }
 };

@@ -75,16 +75,27 @@ const remove = async (id) => {
   return row;
 };
 
-const update = async (id, data) => {
+const update = async (id, sales) => {
+  const isValidate = validateSale(sales);
+
+  if (isValidate.error) return isValidate;
+
+  const allProductsIds = await Promise.all(sales
+    .map((sale) => ProductsModel.getById(sale.productId)));
+
+  const existId = allProductsIds.some((product) => product.length === 0);
+
+  if (existId) return { error: { code: 'notFound', message: 'Product not found' } };
+
   const saleId = await SalesModel.getSalesById(id);
+  
+  if (saleId.length === 0) return { error: { code: 'notFound', message: 'Sale not found' } };
 
-  if (saleId.length === 0) return { error: { code: 'notFound', message: 'Product not found' } };
-
-  await Promise.all(data
-    .map((sale) => SalesModel.addSalesProducts(id, sale.productId, sale.quantity)));
+  await Promise.all(sales.map((sale) => SalesModel.update(id, sale.productId, sale.quantity)));
+  
   return {
-    saleId: id,
-    itemsUpdated: data,
+    saleId: +id,
+    itemsUpdated: sales,
   };
 };
 

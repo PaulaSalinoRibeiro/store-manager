@@ -65,9 +65,9 @@ const update = async (salesId, productId, quantity) => {
   const [rows] = await connection
     .execute(
       `UPDATE sales_products 
-        SET product_id = ?, quantity = ?
-        WHERE sale_id = ?`,
-      [productId, quantity, salesId],
+        SET quantity = ?
+        WHERE sale_id = ? AND product_id = ?`,
+      [quantity, salesId, productId],
   );
   return rows;
 }; 
